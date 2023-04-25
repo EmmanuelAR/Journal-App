@@ -19,6 +19,11 @@ import {
 } from "../../store/auth";
 import { useMemo } from "react";
 
+const formData = {
+  email: "",
+  password: "",
+};
+
 export const LoginPage = () => {
   const { status, errorMessage } = useSelector((state) => state.auth);
 
@@ -26,10 +31,7 @@ export const LoginPage = () => {
   const isAuthenticating = useMemo(() => status === "checking", [status]);
 
   const dispatch = useDispatch();
-  const { email, password, onInputChange, formState } = useForm({
-    email: "",
-    password: "",
-  });
+  const { email, password, onInputChange, formState } = useForm(formData);
 
   const onSubmit = (event) => {
     event.preventDefault();
