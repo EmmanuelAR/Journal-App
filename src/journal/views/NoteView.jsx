@@ -112,7 +112,7 @@ export const NoteView = () => {
           onChange={onInputChange}
         />
       </Grid>
-      <ImageGalery />
+      <ImageGalery images={note.imageUrls} />
     </Grid>
   );
 };
