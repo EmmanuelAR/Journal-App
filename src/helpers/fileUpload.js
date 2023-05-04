@@ -8,11 +8,8 @@ export const fileUpload = async (file) => {
   formData.append("file", file);
   try {
     const resp = await fetch(cloudUrl, { method: "POST", body: formData });
-    console.log(resp);
     if (!resp.ok) throw new Error("No se puede subir la imagen.");
-
     const cloudResp = await resp.json();
-    console.log(cloudResp);
     return cloudResp;
   } catch (error) {
     console.log(error);
