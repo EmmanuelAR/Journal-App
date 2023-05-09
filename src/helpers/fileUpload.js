@@ -1,7 +1,10 @@
 import { async } from "@firebase/util";
 
 export const fileUpload = async (file) => {
-  if (!file) throw new Error("No hay archivo.");
+  // if (!file) throw new Error("No hay archivo.");
+
+  if (!file) return null;
+
   const cloudUrl = "https://api.cloudinary.com/v1_1/damar3clg/image/upload";
   const formData = new FormData();
   formData.append("upload_preset", "react-journal");
@@ -12,7 +15,8 @@ export const fileUpload = async (file) => {
     const cloudResp = await resp.json();
     return cloudResp;
   } catch (error) {
-    console.log(error);
-    throw new Error(error.message);
+    // console.log(error);
+    // throw new Error(error.message);
+    return null;
   }
 };
