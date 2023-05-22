@@ -1,9 +1,13 @@
 import { async } from "@firebase/util";
-import { signInWithGoogle } from "../../../src/firebase/providers";
+import {
+  loginUserWithEmailPassword,
+  signInWithGoogle,
+} from "../../../src/firebase/providers";
 import { checkingCredencials, login, logout } from "../../../src/store/auth";
 import {
   checkingAuthentication,
   startGoogleSignIn,
+  startLoginWithEmailPassword,
 } from "../../../src/store/auth/thunks";
 import { demoUser } from "../../fixtures/authFixtures";
 
@@ -46,5 +50,19 @@ describe("Pruebas en auth thunks", () => {
     expect(dispatch).toHaveBeenCalledWith(checkingCredencials());
 
     expect(dispatch).toHaveBeenCalledWith(logout(loginData));
+  });
+
+  test("startLoginUserWithEmailPassword debe de llamar el checkingCredencials y login - Exito", async () => {
+    const loginData = { ok: true, ...demoUser };
+
+    const formData = { email: demoUser.email, password: 123456 };
+
+    await loginUserWithEmailPassword.mockResolvedValue(loginData);
+
+    await startLoginWithEmailPassword(formData)(dispatch);
+
+    expect(dispatch).toHaveBeenCalledWith(checkingCredencials());
+
+    expect(dispatch).toHaveBeenCalledWith(login(loginData));
   });
 });

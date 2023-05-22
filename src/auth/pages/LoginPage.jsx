@@ -15,7 +15,7 @@ import { AuthLayout } from "../layout/AuthLayout";
 import {
   checkingAuthentication,
   startGoogleSignIn,
-  startLoginUserWithEmailPassword,
+  startLoginWithEmailPassword,
 } from "../../store/auth";
 import { useMemo } from "react";
 
@@ -35,7 +35,7 @@ export const LoginPage = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    dispatch(startLoginUserWithEmailPassword(formState));
+    dispatch(startLoginWithEmailPassword({ email, password }));
   };
 
   const onGoogleSignIn = () => {
